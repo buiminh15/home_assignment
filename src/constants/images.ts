@@ -10,3 +10,5 @@ const BANNER_IMAGES = [
   "https://supermomos-app-resources-us.s3.amazonaws.com/Images/SocialBanner/banner_9.jpg",
   "https://supermomos-app-resources-us.s3.amazonaws.com/Images/SocialBanner/banner_10.jpg",
 ];
+
+export { BANNER_IMAGES };
