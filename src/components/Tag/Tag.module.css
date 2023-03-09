@@ -1,0 +1,26 @@
+.tagContainer {
+    background-color: #F2F4F7;
+    color: #344054;
+    mix-blend-mode: multiply;
+
+    border-radius: 16px;
+    padding: 2px 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tagContainer span {
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+
+.selectedTag {
+    color: #942F70;
+    background: #F9F5FF;
+    mix-blend-mode: multiply;
+}

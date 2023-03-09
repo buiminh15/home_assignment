@@ -1,12 +1,63 @@
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Header from "@/components/Header";
+import BannerFrame from "@/components/BannerFramer/BannerFrame";
+import clsx from "clsx";
+import Datetime from "react-datetime";
+
+import "react-datetime/css/react-datetime.css";
+import { TAGS } from "@/constants/tags";
+import Tag from "@/components/Tag/Tag";
+import { useForm, Controller } from "react-hook-form";
+import { createAccount } from "@/api/request";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+  const [seletedTags, setSeletedTags] = React.useState<string[]>([]);
+  const [tags, setTags] = React.useState<string[]>(TAGS);
+
+  const handleSelectedTags = (name: string) => {
+    const remainTags = tags.filter((tag) => tag !== name);
+    setTags(remainTags);
+    setSeletedTags([...seletedTags, name]);
+  };
+
+  const handleUnSelectedTags = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    name: string
+  ) => {
+    event.stopPropagation();
+    const remainTags = seletedTags.filter((tag) => tag !== name);
+    setTags([...tags, name]);
+    setSeletedTags(remainTags);
+  };
+
+  const onSubmit = async (data) => {
+    console.log("📢 [index.tsx:46]", data);
+    const payload: AccountPayload = {
+      title: "test",
+      banner:
+        "https://supermomos-app-resourcesus.s3.amazonaws.com/Images/SocialBanner/banner_1.jpg",
+      capacity: 50,
+      description: "test 1111",
+      privacy: "Public",
+      startAt: "2022-10-11T19:00:00+00:00",
+      tags: ["Product", "Design"],
+      venue: "Chelsea Market (163 W 20nd Street). Manhattan, NYC",
+    };
+    const res = await createAccount(payload);
+    console.log("📢 [index.tsx:59]", res);
+  };
   return (
     <>
       <Head>

@@ -16,6 +16,7 @@ function Header() {
       <div className={styles.headerLogo}>
         <Link href='/'>
           <Image
+            priority
             src='/assets/icons/logo.svg'
             fill
             alt='logo'

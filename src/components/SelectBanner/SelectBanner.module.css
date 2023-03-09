@@ -1,0 +1,63 @@
+.container {
+    background-color: #f3f3f3;
+    position: fixed;
+    top: 50%;
+    left: 1rem;
+    right: 1rem;
+    transform: translateY(-50%);
+
+    border-radius: .5rem;
+}
+
+.headerSelectBanner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.headerSelectBanner span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #676e82;
+}
+
+.bodySelectBanner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .8rem;
+
+    padding: .5rem;
+}
+
+.imageContainer:hover {
+    border: 2px solid #882a5b;
+}
+
+.seletedBanner {
+    border: 3px solid hsl(329, 53%, 25%);
+    border-radius: 6px;
+}
+
+.footerSelectBanner {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.btn {
+    padding: .5rem 1rem;
+    color: #676e82;
+    font-weight: 600;
+}
+
+.saveBtn {
+    background-color: #fef641;
+    border-radius: .2rem;
+    color: #882a5b;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
