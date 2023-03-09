@@ -3,13 +3,20 @@ import React from "react";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { FiChevronDown } from "react-icons/fi";
 import clsx from "clsx";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 function Header() {
   const [nav, setNav] = React.useState(false);
   const handleNav = () => {
     setNav(!nav);
-    console.log("test");
+  };
+
+  const closeNav = () => {
+    setNav(false);
   };
   return (
     <header className={styles.header}>
@@ -25,20 +32,26 @@ function Header() {
         </Link>
       </div>
       <nav className={styles.nav}>
-        <ul style={{ color: "black" }} className={styles.navContainer}>
-          <li className='ml-10 text-sm uppercase hover:border-b'>
+        <ul
+          style={{ color: "black" }}
+          className={clsx(styles.navContainer, inter.className)}
+        >
+          <li>
             <Link href='/'>Blog</Link>
           </li>
-          <li className='ml-10 text-sm uppercase hover:border-b'>
+          <li>
             <Link href='/'>Socials</Link>
           </li>
-          <li className='ml-10 text-sm uppercase hover:border-b'>
+          <li>
             <Link href='/'>Past Socials</Link>
           </li>
-          <li className='ml-10 text-sm uppercase hover:border-b'>
-            <Link href='/'>Clubs</Link>
+          <li>
+            <Link href='/' className={clsx(styles.row)} style={{ gap: 2 }}>
+              Clubs
+              <FiChevronDown size={14} color='black' />
+            </Link>
           </li>
-          <li className='ml-10 text-sm uppercase hover:border-b'>
+          <li>
             <Link href='/'>Contact</Link>
           </li>
         </ul>
@@ -46,7 +59,7 @@ function Header() {
         <div
           style={{ color: "black" }}
           onClick={handleNav}
-          className={styles.hamburgerIcon}
+          className={clsx(styles.hamburgerIcon, styles.cursorPointer)}
         >
           <AiOutlineMenu size={25} />
         </div>
@@ -65,38 +78,36 @@ function Header() {
         >
           <div>
             <div className={clsx(styles.sideDrawer, styles.close)}>
-              <div
-                onClick={handleNav}
-                className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'
-              >
-                <AiOutlineClose size={24} />
+              <div onClick={handleNav} className={clsx(styles.cursorPointer)}>
+                <AiOutlineClose size={24} color='white' />
               </div>
             </div>
           </div>
           <div className={clsx(styles.py4, styles.col)}>
-            <ul className={styles.navOverlay}>
+            <ul className={clsx(styles.navOverlay, inter.className)}>
               <Link href='/'>
-                <li onClick={() => setNav(false)} className={clsx(styles.py4)}>
+                <li onClick={closeNav} className={clsx(styles.py4)}>
                   Blog
                 </li>
               </Link>
               <Link href='/'>
-                <li onClick={() => setNav(false)} className={clsx(styles.py4)}>
+                <li onClick={closeNav} className={clsx(styles.py4)}>
                   Socials
                 </li>
               </Link>
               <Link href='/'>
-                <li onClick={() => setNav(false)} className={clsx(styles.py4)}>
+                <li onClick={closeNav} className={clsx(styles.py4)}>
                   Past Socials
                 </li>
               </Link>
               <Link href='/'>
-                <li onClick={() => setNav(false)} className={clsx(styles.py4)}>
+                <li onClick={closeNav} className={clsx(styles.py4, styles.row)}>
                   Clubs
+                  <FiChevronDown size={24} color='white' />
                 </li>
               </Link>
               <Link href='/'>
-                <li onClick={() => setNav(false)} className={clsx(styles.py4)}>
+                <li onClick={closeNav} className={clsx(styles.py4)}>
                   Contact
                 </li>
               </Link>

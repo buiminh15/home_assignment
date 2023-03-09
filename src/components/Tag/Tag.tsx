@@ -6,17 +6,24 @@ import styles from "./Tag.module.css";
 type TagProps = {
   name: string;
   isSelected?: boolean;
+  textStyle?: any;
   handleSelect?: () => void;
   handleUnSelected?: () => void;
 };
 
-function Tag({ name, isSelected, handleSelect, handleUnSelected }: TagProps) {
+function Tag({
+  name,
+  isSelected,
+  textStyle,
+  handleSelect,
+  handleUnSelected,
+}: TagProps) {
   return (
     <div
       onClick={handleSelect}
       className={clsx(styles.tagContainer, isSelected && styles.selectedTag)}
     >
-      <span>{name}</span>
+      <span className={clsx(textStyle)}>{name}</span>
       {isSelected && (
         <Image
           src='/assets/icons/small-close.svg'

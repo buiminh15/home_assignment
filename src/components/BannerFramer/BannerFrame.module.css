@@ -9,8 +9,6 @@
     display: grid;
     place-items: center;
     cursor: pointer;
-
-    position: relative;
     overflow: hidden;
 }
 
@@ -29,4 +27,16 @@
 .bannerImage {
     position: absolute;
     inset: 0;
+}
+
+.bannerOverlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        aspect-ratio: 2;
+    }
 }

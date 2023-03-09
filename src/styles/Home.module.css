@@ -46,7 +46,7 @@
   width: 75%;
   padding: 1em;
   transition: all ease-in 300ms;
-
+  z-index: 1000;
 }
 
 .navContainerSideDrawer.show {
@@ -65,6 +65,7 @@
 
 .navOverlay {
   font-size: 1.2rem;
+  color: whitesmoke;
 }
 
 .py4 {
@@ -86,16 +87,29 @@
   padding: 1rem 2rem;
 }
 
+.gridContainer {
+  display: grid;
+  grid-template-rows: min-content;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+}
+
+.gridTwoSpanCol {
+  grid-column: 1 / span 2;
+}
+
 .inputWrapper {
   display: flex;
   align-items: center;
-  gap: .2rem;
+  gap: 1rem;
+  /* z-index: -1; */
 }
 
 .input input {
   border: none;
   padding: .4rem;
   border-radius: .4rem;
+  width: 100%;
 }
 
 .row {
@@ -118,6 +132,14 @@
 
 .mb12 {
   margin-bottom: 0.75em;
+}
+
+.zIndexMinus {
+  z-index: -1;
+}
+
+.unsetRelative {
+  position: unset !important;
 }
 
 .textarea {
@@ -154,7 +176,8 @@
 }
 
 .rowInline label {
-  font-size: 0.875em;
+  /* font-size: 0.875em; */
+  font-size: 0.8em;
 }
 
 .submitBtn {
@@ -174,15 +197,72 @@
 }
 
 .submitBtn:hover {
-  background-color: hsl(57, 99%, 50%);
+  background-color: hsl(57, 99%, 40%);
+  color: hsl(321, 53%, 28%);
 }
 
-@media only screen and (min-width: 768px) {
+.tagHeader {
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.tagDesc {
+  font-weight: 400;
+  font-size: 14px;
+  color: #475467;
+}
+
+.tagColorBlack {
+  color: #344054;
+}
+
+@media only screen and (min-width: 600px) {
   .navContainer {
     display: flex;
   }
 
   .hamburgerIcon {
     display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .gridParentContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .gridContainer {
+    height: min-content;
+  }
+
+  .wResponsive {
+    width: 60%;
+  }
+
+  .sectionContainer {
+    padding: 3rem 2rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .gridParentContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+
+  .gridContainer {
+    height: min-content;
+  }
+
+  .wResponsive {
+    width: 40%;
+  }
+
+  .sectionContainer {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }

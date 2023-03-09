@@ -4,6 +4,9 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { BANNER_IMAGES } from "@/constants/images";
 import Image from "next/image";
 import clsx from "clsx";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 type SelectBannerProps = {
   handleClose: () => void;
@@ -53,7 +56,12 @@ function SelectBanner({ handleClose, handleSeletedBanner }: SelectBannerProps) {
       <hr />
       <div className={styles.footerSelectBanner}>
         <button
-          className={clsx(styles.btn, styles.closeBtn, styles.cursorPointer)}
+          className={clsx(
+            styles.btn,
+            styles.closeBtn,
+            styles.cursorPointer,
+            inter.className
+          )}
           onClick={handleClose}
         >
           Close
@@ -63,7 +71,12 @@ function SelectBanner({ handleClose, handleSeletedBanner }: SelectBannerProps) {
             handleSeletedBanner(bannerUrl);
             handleClose();
           }}
-          className={clsx(styles.btn, styles.saveBtn, styles.cursorPointer)}
+          className={clsx(
+            styles.btn,
+            styles.saveBtn,
+            styles.cursorPointer,
+            inter.className
+          )}
         >
           Save
         </button>

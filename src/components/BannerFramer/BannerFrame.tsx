@@ -3,7 +3,9 @@ import Image from "next/image";
 import React from "react";
 import SelectBanner from "../SelectBanner/SelectBanner";
 import styles from "./BannerFrame.module.css";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 function BannerFrame() {
   const [showSelectBanner, setShowBanner] = React.useState(false);
   const [selectedBanner, setSelectedBanner] = React.useState("");
@@ -43,15 +45,18 @@ function BannerFrame() {
               height={24}
               alt='banner icon'
             />
-            <span>Add a banner</span>
+            <span className={clsx(inter.className)}>Add a banner</span>
           </div>
         )}
       </div>
       {showSelectBanner && (
-        <SelectBanner
-          handleClose={handleCloseSelectBanner}
-          handleSeletedBanner={handleSeletedBanner}
-        />
+        <>
+          <SelectBanner
+            handleClose={handleCloseSelectBanner}
+            handleSeletedBanner={handleSeletedBanner}
+          />
+          <div className={clsx(styles.bannerOverlay)}></div>
+        </>
       )}
     </>
   );

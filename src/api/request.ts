@@ -8,8 +8,6 @@ const headers = {
   },
 };
 
-const createAccount = (payload: AccountPayload) => {
+const createAccount = (payload: AccountPayload) =>
   axios.post(BASE_URL, payload, headers);
-};
-
 export { createAccount };

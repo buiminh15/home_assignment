@@ -7,6 +7,7 @@
     transform: translateY(-50%);
 
     border-radius: .5rem;
+    z-index: 50;
 }
 
 .headerSelectBanner {
@@ -32,6 +33,7 @@
 
 .imageContainer:hover {
     border: 2px solid #882a5b;
+    transition: all ease 200ms;
 }
 
 .seletedBanner {
@@ -56,8 +58,56 @@
     background-color: #fef641;
     border-radius: .2rem;
     color: #882a5b;
+    transition: all ease-in 300ms;
 }
+
+.saveBtn:hover {
+    background-color: hsl(57, 99%, 40%);
+}
+
 
 .cursorPointer {
     cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        inset: 10%;
+        bottom: unset;
+        transform: unset;
+    }
+
+    .headerSelectBanner {
+        padding: 2rem;
+    }
+
+    .bodySelectBanner {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 2rem;
+    }
+
+    .footerSelectBanner {
+        padding: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        inset: 10%;
+        bottom: unset;
+        transform: unset;
+    }
+
+    .headerSelectBanner {
+        padding: 2rem;
+    }
+
+    .bodySelectBanner {
+        grid-template-columns: repeat(6, 1fr);
+        padding: 2rem;
+    }
+
+    .footerSelectBanner {
+        padding: 2rem;
+    }
 }
