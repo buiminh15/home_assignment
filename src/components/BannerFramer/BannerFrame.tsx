@@ -26,7 +26,6 @@ function BannerFrame({ navState }: BannerFrameProps) {
     setSelectedBanner(banner);
   };
 
-  console.log("📢 [BannerFrame.tsx:29]", navState);
   return (
     <>
       <div

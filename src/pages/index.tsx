@@ -18,109 +18,109 @@ import { AccountPayload } from "@/types/AccountType";
 
 const inter = Inter({ subsets: ["latin"] });
 
-type FormValues = {
-  title: string;
-  date: string;
-  time: string;
-  venue: string;
-  capacity: number;
-  cost: number;
-  description: string;
-  privacy: string;
-  banner: string;
-  tags: string[];
-  attendees: boolean;
-};
+// type FormValues = {
+//   title: string;
+//   date: string;
+//   time: string;
+//   venue: string;
+//   capacity: number;
+//   cost: number;
+//   description: string;
+//   privacy: string;
+//   banner: string;
+//   tags: string[];
+//   attendees: boolean;
+// };
 
-const resolver: Resolver<FormValues> = async (values) => {
-  return {
-    values: values.title
-      ? values.title
-        ? values.date
-          ? values.date
-          : {}
-        : {}
-      : {},
-    errors: !values.title
-      ? {
-          title: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.date
-      ? {
-          date: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.time
-      ? {
-          time: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.venue
-      ? {
-          venue: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.capacity
-      ? {
-          capacity: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.description
-      ? {
-          description: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.privacy
-      ? {
-          privacy: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.banner
-      ? {
-          banner: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.tags
-      ? {
-          tags: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.cost
-      ? {
-          cost: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : !values.attendees
-      ? {
-          attendees: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : {},
-  };
-};
+// const resolver: Resolver<FormValues> = async (values) => {
+//   return {
+//     values: values.title
+//       ? values.title
+//         ? values.date
+//           ? values.date
+//           : {}
+//         : {}
+//       : {},
+//     errors: !values.title
+//       ? {
+//           title: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.date
+//       ? {
+//           date: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.time
+//       ? {
+//           time: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.venue
+//       ? {
+//           venue: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.capacity
+//       ? {
+//           capacity: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.description
+//       ? {
+//           description: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.privacy
+//       ? {
+//           privacy: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.banner
+//       ? {
+//           banner: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.tags
+//       ? {
+//           tags: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.cost
+//       ? {
+//           cost: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : !values.attendees
+//       ? {
+//           attendees: {
+//             type: "required",
+//             message: "This is required.",
+//           },
+//         }
+//       : {},
+//   };
+// };
 
 export default function Home() {
   const {
@@ -128,7 +128,13 @@ export default function Home() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormValues>({ resolver });
+  } = useForm<any>();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   control,
+  //   formState: { errors },
+  // } = useForm<FormValues>({ resolver });
   const [seletedTags, setSeletedTags] = React.useState<string[]>([]);
   const [isOpeNav, setOpenNav] = React.useState(false);
   const [tags, setTags] = React.useState<string[]>(TAGS);
@@ -205,7 +211,7 @@ export default function Home() {
                   </div>
                   {errors.title && (
                     <p className={clsx(inter.className)} role='alert'>
-                      {errors.title?.message}
+                      {errors.title?.message as unknown as string}
                     </p>
                   )}
                 </div>
@@ -244,7 +250,7 @@ export default function Home() {
 
                   {errors.date && (
                     <p className={clsx(inter.className)} role='alert'>
-                      {errors.date?.message}
+                      {errors.date?.message as unknown as string}
                     </p>
                   )}
                 </div>
@@ -279,7 +285,7 @@ export default function Home() {
                   </div>
                   {errors.time && (
                     <p className={clsx(inter.className)} role='alert'>
-                      {errors.time?.message}
+                      {errors.time?.message as unknown as string}
                     </p>
                   )}
                 </div>
@@ -312,7 +318,7 @@ export default function Home() {
                     </div>
                     {errors.venue && (
                       <p role='alert' className={clsx(inter.className)}>
-                        {errors.venue?.message}
+                        {errors.venue?.message as unknown as string}
                       </p>
                     )}
                   </div>
@@ -340,7 +346,7 @@ export default function Home() {
                   </div>
                   {errors.capacity && (
                     <p className={clsx(inter.className)} role='alert'>
-                      {errors.capacity?.message}
+                      {errors.capacity?.message as unknown as string}
                     </p>
                   )}
                 </div>
@@ -407,7 +413,7 @@ export default function Home() {
                   style={{ paddingLeft: 0 }}
                   role='alert'
                 >
-                  {errors.description?.message}
+                  {errors.description?.message as unknown as string}
                 </p>
               )}
             </div>
@@ -519,7 +525,7 @@ export default function Home() {
                     className={clsx(inter.className)}
                     style={{ paddingLeft: 0, marginBottom: 2, marginTop: -8 }}
                   >
-                    {errors.privacy?.message}
+                    {errors.privacy?.message as unknown as string}
                   </p>
                 )}
               </div>
