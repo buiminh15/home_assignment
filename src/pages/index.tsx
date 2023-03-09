@@ -176,6 +176,24 @@ export default function Home() {
     setData(res?.data);
     console.log("📢 [index.tsx:59]", data);
   };
+
+  const onSubmit1 = async () => {
+    const payload: AccountPayload = {
+      title: "test",
+      banner:
+        "https://supermomos-app-resourcesus.s3.amazonaws.com/Images/SocialBanner/banner_1.jpg",
+      capacity: 50,
+      description: "test 1111",
+      privacy: "Public",
+      startAt: "2022-10-11T19:00:00+00:00",
+      tags: ["Product", "Design"],
+      venue: "Chelsea Market (163 W 20nd Street). Manhattan, NYC",
+    };
+    const res = await createAccount(payload);
+    setData(res?.data);
+    console.log("📢 [index.tsx:59]", data);
+  };
+
   return (
     <>
       <Head>
@@ -584,6 +602,7 @@ export default function Home() {
             </button>
           </form>
 
+          <button onClick={onSubmit1}>TEST</button>
           <div>{JSON.stringify(data)}</div>
         </section>
       </main>
