@@ -14,6 +14,7 @@ import Tag from "@/components/Tag/Tag";
 import { useForm, Controller, Resolver } from "react-hook-form";
 import { createAccount } from "@/api/request";
 import { AiFillBook } from "react-icons/ai";
+import { AccountPayload } from "@/types/AccountType";
 
 const inter = Inter({ subsets: ["latin"] });
 
