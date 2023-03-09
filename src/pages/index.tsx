@@ -611,7 +611,12 @@ export default function Home() {
             </button>
           </form>
 
-          <button onClick={onSubmit1}>TEST</button>
+          <button
+            style={{ padding: 10, backgroundColor: "green" }}
+            onClick={onSubmit1}
+          >
+            TEST 1
+          </button>
           <div>{JSON.stringify(data)}</div>
         </section>
       </main>
