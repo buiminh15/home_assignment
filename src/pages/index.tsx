@@ -11,11 +11,115 @@ import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { TAGS } from "@/constants/tags";
 import Tag from "@/components/Tag/Tag";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, Resolver } from "react-hook-form";
 import { createAccount } from "@/api/request";
 import { AiFillBook } from "react-icons/ai";
 
 const inter = Inter({ subsets: ["latin"] });
+
+type FormValues = {
+  title: string;
+  date: string;
+  time: string;
+  venue: string;
+  capacity: number;
+  cost: number;
+  description: string;
+  privacy: string;
+  banner: string;
+  tags: string[];
+  attendees: boolean;
+};
+
+const resolver: Resolver<FormValues> = async (values) => {
+  return {
+    values: values.title
+      ? values.title
+        ? values.date
+          ? values.date
+          : {}
+        : {}
+      : {},
+    errors: !values.title
+      ? {
+          title: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.date
+      ? {
+          date: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.time
+      ? {
+          time: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.venue
+      ? {
+          venue: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.capacity
+      ? {
+          capacity: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.description
+      ? {
+          description: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.privacy
+      ? {
+          privacy: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.banner
+      ? {
+          banner: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.tags
+      ? {
+          tags: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.cost
+      ? {
+          cost: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : !values.attendees
+      ? {
+          attendees: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : {},
+  };
+};
 
 export default function Home() {
   const {
@@ -23,7 +127,7 @@ export default function Home() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>({ resolver });
   const [seletedTags, setSeletedTags] = React.useState<string[]>([]);
   const [isOpeNav, setOpenNav] = React.useState(false);
   const [tags, setTags] = React.useState<string[]>(TAGS);
@@ -49,7 +153,7 @@ export default function Home() {
     setOpenNav(state);
   };
 
-  const onSubmit = async (data: AccountPayload) => {
+  const onSubmit = async (data: any) => {
     const payload: AccountPayload = {
       title: "test",
       banner:
@@ -288,13 +392,13 @@ export default function Home() {
                   inter.className,
                   styles.tagDesc
                 )}
-                name='description'
                 id='description'
-                cols='30'
-                rows='10'
+                cols={30}
+                rows={10}
                 {...register("description", {
                   required: "Description is required",
                 })}
+                name='description'
               />
               {errors.description && (
                 <p
@@ -329,10 +433,10 @@ export default function Home() {
                 <input
                   type='checkbox'
                   id='attendees'
-                  name='attendees'
                   value='attendees'
                   className={clsx(styles.checkbox)}
                   {...register("attendees")}
+                  name='attendees'
                 />
                 <label
                   htmlFor='attendees'
@@ -360,11 +464,11 @@ export default function Home() {
                     <input
                       type='radio'
                       id='public'
-                      name='privacy'
                       value='Public'
                       {...register("privacy", {
                         required: "Privacy is required",
                       })}
+                      name='privacy'
                     />
                     <label
                       htmlFor='public'
@@ -377,11 +481,11 @@ export default function Home() {
                     <input
                       type='radio'
                       id='audience'
-                      name='privacy'
                       value='Curated Audience'
                       {...register("privacy", {
                         required: "Privacy is required",
                       })}
+                      name='privacy'
                     />
                     <label
                       htmlFor='audience'
@@ -394,11 +498,11 @@ export default function Home() {
                     <input
                       type='radio'
                       id='community'
-                      name='privacy'
                       value='Community Only'
                       {...register("privacy", {
                         required: "Privacy is required",
                       })}
+                      name='privacy'
                     />
                     <label
                       htmlFor='community'

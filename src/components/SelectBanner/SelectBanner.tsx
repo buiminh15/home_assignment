@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 type SelectBannerProps = {
   handleClose: () => void;
-  handleSeletedBanner: (banner) => void;
+  handleSeletedBanner: (banner: string) => void;
 };
 
 function SelectBanner({ handleClose, handleSeletedBanner }: SelectBannerProps) {

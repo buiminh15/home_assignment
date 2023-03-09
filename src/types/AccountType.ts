@@ -1,4 +1,4 @@
-type AccountPayload = {
+export type AccountPayload = {
   title: string;
   startAt: string;
   venue: string;

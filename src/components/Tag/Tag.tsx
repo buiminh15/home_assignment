@@ -8,7 +8,7 @@ type TagProps = {
   isSelected?: boolean;
   textStyle?: any;
   handleSelect?: () => void;
-  handleUnSelected?: () => void;
+  handleUnSelected?: (e: any) => void;
 };
 
 function Tag({

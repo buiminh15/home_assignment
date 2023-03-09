@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.supermomos-dev.com/interview/social";
+const BASE_URL = process.env.BASE_URL;
 
 const headers = {
   headers: {
@@ -9,5 +9,5 @@ const headers = {
 };
 
 const createAccount = (payload: AccountPayload) =>
-  axios.post(BASE_URL, payload, headers);
+  axios.post(BASE_URL as string, payload, headers);
 export { createAccount };
