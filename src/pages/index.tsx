@@ -137,6 +137,7 @@ export default function Home() {
   // } = useForm<FormValues>({ resolver });
   const [seletedTags, setSeletedTags] = React.useState<string[]>([]);
   const [isOpeNav, setOpenNav] = React.useState(false);
+  const [data, setData] = React.useState<any>();
   const [tags, setTags] = React.useState<string[]>(TAGS);
 
   const handleSelectedTags = (name: string) => {
@@ -156,7 +157,6 @@ export default function Home() {
   };
 
   const handleNavMenu = (state: boolean) => {
-    console.log("📢 [index.tsx:48]", state);
     setOpenNav(state);
   };
 
@@ -172,7 +172,8 @@ export default function Home() {
       tags: ["Product", "Design"],
       venue: "Chelsea Market (163 W 20nd Street). Manhattan, NYC",
     };
-    // const res = await createAccount(payload);
+    const res = await createAccount(payload);
+    setData(res?.data);
     console.log("📢 [index.tsx:59]", data);
   };
   return (
@@ -582,6 +583,8 @@ export default function Home() {
               create social
             </button>
           </form>
+
+          <div>{JSON.stringify(data)}</div>
         </section>
       </main>
     </>
