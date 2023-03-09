@@ -189,8 +189,17 @@ export default function Home() {
       tags: ["Product", "Design"],
       venue: "Chelsea Market (163 W 20nd Street). Manhattan, NYC",
     };
-    const res = await createAccount(payload);
-    setData(res?.data);
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post(
+      "https://api.supermomos-dev.com/interview/social",
+      payload,
+      headers
+    );
+    setData(res);
     console.log("📢 [index.tsx:59]", data);
   };
 
