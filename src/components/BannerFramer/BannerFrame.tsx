@@ -6,7 +6,12 @@ import styles from "./BannerFrame.module.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
-function BannerFrame() {
+
+type BannerFrameProps = {
+  navState: boolean;
+};
+
+function BannerFrame({ navState }: BannerFrameProps) {
   const [showSelectBanner, setShowBanner] = React.useState(false);
   const [selectedBanner, setSelectedBanner] = React.useState("");
   const handleOpenSelectBanner = () => {
@@ -20,9 +25,14 @@ function BannerFrame() {
   const handleSeletedBanner = (banner: string) => {
     setSelectedBanner(banner);
   };
+
+  console.log("📢 [BannerFrame.tsx:29]", navState);
   return (
     <>
-      <div className={[styles.container]} onClick={handleOpenSelectBanner}>
+      <div
+        className={clsx(styles.container, navState && styles.unsetRelative)}
+        onClick={handleOpenSelectBanner}
+      >
         {selectedBanner ? (
           <div className={clsx(styles.bannerImage)}>
             <Image

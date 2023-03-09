@@ -25,6 +25,7 @@ export default function Home() {
     formState: { errors },
   } = useForm();
   const [seletedTags, setSeletedTags] = React.useState<string[]>([]);
+  const [isOpeNav, setOpenNav] = React.useState(false);
   const [tags, setTags] = React.useState<string[]>(TAGS);
 
   const handleSelectedTags = (name: string) => {
@@ -41,6 +42,11 @@ export default function Home() {
     const remainTags = seletedTags.filter((tag) => tag !== name);
     setTags([...tags, name]);
     setSeletedTags(remainTags);
+  };
+
+  const handleNavMenu = (state: boolean) => {
+    console.log("📢 [index.tsx:48]", state);
+    setOpenNav(state);
   };
 
   const onSubmit = async (data: AccountPayload) => {
@@ -67,7 +73,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <Header />
+        <Header handleSideNav={handleNavMenu} />
 
         <section className={clsx(styles.sectionContainer)}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -256,7 +262,7 @@ export default function Home() {
                 </div>
               </div>
               <div className={clsx(styles.bannerFramer, styles.mb32)}>
-                <BannerFrame />
+                <BannerFrame navState={isOpeNav} />
               </div>
             </div>
             {/* description */}

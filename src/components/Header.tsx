@@ -9,14 +9,20 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-function Header() {
+type HeaderProps = {
+  handleSideNav: (state: boolean) => void;
+};
+
+function Header({ handleSideNav }: HeaderProps) {
   const [nav, setNav] = React.useState(false);
   const handleNav = () => {
     setNav(!nav);
+    handleSideNav(!nav);
   };
 
   const closeNav = () => {
     setNav(false);
+    handleSideNav(false);
   };
   return (
     <header className={styles.header}>

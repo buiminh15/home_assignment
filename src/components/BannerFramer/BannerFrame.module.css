@@ -9,6 +9,7 @@
     display: grid;
     place-items: center;
     cursor: pointer;
+    position: relative;
     overflow: hidden;
 }
 
@@ -33,6 +34,10 @@
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+.unsetRelative {
+    position: unset;
 }
 
 @media only screen and (min-width: 1200px) {
