@@ -15,7 +15,7 @@ import { useForm, Controller, Resolver } from "react-hook-form";
 import { createAccount } from "@/api/request";
 import { AiFillBook } from "react-icons/ai";
 import { AccountPayload } from "@/types/AccountType";
-
+import axios from "axios";
 const inter = Inter({ subsets: ["latin"] });
 
 // type FormValues = {
