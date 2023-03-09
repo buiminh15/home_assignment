@@ -68,6 +68,240 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Header />
+
+        <section className={clsx(styles.sectionContainer)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={clsx(styles.mb32)}>
+              <h2>Untitle Event</h2>
+            </div>
+            <div className={clsx(styles.row, styles.mb28)}>
+              {/* date */}
+              <div className={clsx(styles.inputWrapper)}>
+                <Image
+                  src='/assets/icons/date.svg'
+                  width={34}
+                  height={34}
+                  alt='date icon'
+                />
+
+                <Controller
+                  name='date'
+                  control={control}
+                  // rules={{ required: true }}
+                  render={({
+                    field: { onChange, onBlur, value, ref },
+                    formState: { errors },
+                  }) => (
+                    <Datetime
+                      closeOnSelect
+                      className={clsx(styles.input)}
+                      dateFormat='MMMM DD, ddd'
+                      timeFormat={false}
+                    />
+                  )}
+                />
+              </div>
+              {/* time */}
+              <div className={clsx(styles.inputWrapper)}>
+                <Image
+                  src='/assets/icons/time.svg'
+                  width={34}
+                  height={34}
+                  alt='time icon'
+                />
+                <Controller
+                  name='time'
+                  control={control}
+                  render={({ field }) => (
+                    <Datetime
+                      closeOnSelect
+                      className={clsx(styles.input)}
+                      timeFormat='h A'
+                      dateFormat={false}
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              {errors.time && <p role='alert'>{errors.time?.message}</p>}
+            </div>
+            {/* location */}
+            <div className={clsx(styles.row, styles.mb12)}>
+              <div className={clsx(styles.inputWrapper, styles.wFull)}>
+                <Image
+                  src='/assets/icons/location.svg'
+                  width={14}
+                  height={16}
+                  alt='loaction icon'
+                />
+                <div className={clsx(styles.input, styles.wFull)}>
+                  <input
+                    type='text'
+                    className={clsx(styles.wFull)}
+                    {...register("location", {
+                      // required: "Location is required",
+                    })}
+                  />
+                  {errors.location && (
+                    <p role='alert'>{errors.location?.message}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* cost and capacity */}
+            <div className={clsx(styles.row, styles.mb32)}>
+              {/* capacity */}
+              <div className={clsx(styles.inputWrapper)}>
+                <Image
+                  src='/assets/icons/capacity.svg'
+                  width={16}
+                  height={14}
+                  alt='capacity icon'
+                />
+                <div className={clsx(styles.input, styles.wFull)}>
+                  <input
+                    placeholder='Max capacity'
+                    type='number'
+                    min={0}
+                    className={clsx(styles.wFull)}
+                    {...register("capacity", {
+                      // required: "Max capacity is required",
+                    })}
+                  />
+                  {errors.capacity && (
+                    <p role='alert'>{errors.capacity?.message}</p>
+                  )}
+                </div>
+              </div>
+              {/* cost */}
+              <div className={clsx(styles.inputWrapper)}>
+                <Image
+                  src='/assets/icons/costs.svg'
+                  width={16}
+                  height={16}
+                  alt='costs icon'
+                />
+                <div className={clsx(styles.input, styles.wFull)}>
+                  <input
+                    placeholder='Cost per person'
+                    type='number'
+                    min={0}
+                    className={clsx(styles.wFull)}
+                    {...register("cost")}
+                  />
+                </div>
+              </div>
+            </div>
+            <BannerFrame />
+            {/* description */}
+            <div className={clsx(styles.col)}>
+              <label htmlFor='description'>Description</label>
+              <textarea
+                placeholder='Description of your event...'
+                className={styles.textarea}
+                name='description'
+                id='description'
+                cols='30'
+                rows='10'
+                {...register("description", {
+                  // required: "Description is required",
+                })}
+              />
+              {errors.description && (
+                <p role='alert'>{errors.description?.message}</p>
+              )}
+            </div>
+
+            {/* settings */}
+            <div className={clsx(styles.settingsContainer)}>
+              <h3 className={clsx(styles.textSettings)}>Settings</h3>
+
+              <div className={clsx(styles.row)}>
+                <input
+                  type='checkbox'
+                  id='attendees'
+                  name='attendees'
+                  value='attendees'
+                  {...register("attendees")}
+                />
+                <label htmlFor='attendees'> I want to approve attendees</label>
+              </div>
+              <div>
+                <p>Privacy</p>
+                <div className={clsx(styles.row)}>
+                  <div className={clsx(styles.rowInline)}>
+                    <input
+                      type='radio'
+                      id='public'
+                      name='privacy'
+                      value='Public'
+                      {...register("privacy", {
+                        // required: "Privacy is required",
+                      })}
+                    />
+                    <label htmlFor='public'>Public</label>
+                  </div>
+                  <div className={clsx(styles.rowInline)}>
+                    <input
+                      type='radio'
+                      id='audience'
+                      name='privacy'
+                      value='Curated Audience'
+                      {...register("privacy", {
+                        // required: "Privacy is required",
+                      })}
+                    />
+                    <label htmlFor='audience'>Curated Audience</label>
+                  </div>
+                  <div className={clsx(styles.rowInline)}>
+                    <input
+                      type='radio'
+                      id='community'
+                      name='privacy'
+                      value='Community Only'
+                      {...register("privacy", {
+                        // required: "Privacy is required",
+                      })}
+                    />
+                    <label htmlFor='community'>Community Only</label>
+                  </div>
+                </div>
+                {errors.privacy && (
+                  <p role='alert'>{errors.privacy?.message}</p>
+                )}
+              </div>
+
+              <div className={clsx(styles.col)}>
+                <p>Tag your social</p>
+                <p>Pick tags for our curation engine to work its magin</p>
+
+                <div className={clsx(styles.row)}>
+                  {seletedTags.map((tag) => (
+                    <Tag
+                      key={tag}
+                      name={tag}
+                      isSelected
+                      handleUnSelected={(e) => handleUnSelectedTags(e, tag)}
+                    />
+                  ))}
+                </div>
+                <div className={clsx(styles.row)}>
+                  {tags.map((tag) => (
+                    <Tag
+                      key={tag}
+                      name={tag}
+                      handleSelect={() => handleSelectedTags(tag)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <button type='submit' className={clsx(styles.submitBtn)}>
+              create social
+            </button>
+          </form>
+        </section>
       </main>
     </>
   );
