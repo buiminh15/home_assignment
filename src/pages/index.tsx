@@ -194,11 +194,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
     };
-    const res = await axios.post(
-      "https://api.supermomos-dev.com/interview/social",
-      payload,
-      headers
-    );
+    const res = await axios.post("/social", payload, headers);
     setData(res);
     console.log("📢 [index.tsx:59]", data);
   };

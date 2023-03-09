@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/social',
+        destination: 'https://api.supermomos-dev.com/interview/social'
+      },
+    ]
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [
