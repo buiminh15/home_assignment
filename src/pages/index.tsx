@@ -45,8 +45,6 @@ function Home() {
     }
   }, [JSON.stringify(data)]);
 
-  console.log("dimensions::: ", dimensions);
-
   const handleSelectedTags = (name: string) => {
     const remainTags = tags.filter((tag) => tag !== name);
     setTags(remainTags);
@@ -72,10 +70,11 @@ function Home() {
   };
 
   const onSubmit = async (data: any) => {
-    console.log("data", data);
+    const convertedDate = dayjs(data.date).format("YYYY-MM-DD");
+    const convertedTime = dayjs(data.time).format("hh:mm:ss");
     const payload: AccountPayload = {
       title: data.title,
-      startAt: "2022-10-11T19:00:00+00:00",
+      startAt: `${convertedDate}T${convertedTime}+00:00`,
       venue: data.venue,
       capacity: data.capacity,
       price: data.cost,
@@ -83,13 +82,18 @@ function Home() {
       isManualApprove: data.attendees,
       privacy: data.privacy,
       banner: hasBanner,
-      tags,
+      tags: selectedTags,
     };
-    const res = (await createAccount({
-      path: URL_PATH.social,
-      payload,
-    })) as unknown as AccountResponse;
-    setData(res);
+    try {
+      const res = (await createAccount({
+        path: URL_PATH.social,
+        payload,
+      })) as unknown as AccountResponse;
+      setData(res);
+    } catch (error) {
+      console.log("📢 [index.tsx:94]", error);
+      alert(JSON.stringify(error));
+    }
   };
 
   const renderForm = () => {
