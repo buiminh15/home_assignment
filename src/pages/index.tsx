@@ -687,12 +687,6 @@ function Home() {
         <section className={clsx(styles.sectionContainer)}>
           {data ? renderData() : renderForm()}
         </section>
-        <button
-          style={{ padding: 10, backgroundColor: "green" }}
-          onClick={onSubmit1}
-        >
-          TEST 1
-        </button>
       </main>
     </>
   );

@@ -21,6 +21,7 @@ function SelectBanner({
   const handleCickBanner = (banner: string) => {
     setBanner(banner);
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.headerSelectBanner}>
@@ -43,6 +44,7 @@ function SelectBanner({
           >
             <Image
               priority
+              quality={60}
               src={image}
               alt={`image-banner-${index}`}
               width={120}
