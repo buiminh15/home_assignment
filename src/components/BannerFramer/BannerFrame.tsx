@@ -9,11 +9,20 @@ const inter = Inter({ subsets: ["latin"] });
 
 type BannerFrameProps = {
   navState: boolean;
+  handleSetBanner: (banner: string) => void;
+  banner?: string;
 };
 
-function BannerFrame({ navState }: BannerFrameProps) {
+function BannerFrame({ navState, banner, handleSetBanner }: BannerFrameProps) {
   const [showSelectBanner, setShowBanner] = React.useState(false);
   const [selectedBanner, setSelectedBanner] = React.useState("");
+
+  React.useEffect(() => {
+    if (banner) {
+      setSelectedBanner(banner);
+    }
+  }, [banner]);
+
   const handleOpenSelectBanner = () => {
     setShowBanner(true);
   };
@@ -22,8 +31,9 @@ function BannerFrame({ navState }: BannerFrameProps) {
     setShowBanner(false);
   };
 
-  const handleSeletedBanner = (banner: string) => {
+  const handleSelectedBanner = (banner: string) => {
     setSelectedBanner(banner);
+    handleSetBanner(banner);
   };
 
   return (
@@ -38,7 +48,7 @@ function BannerFrame({ navState }: BannerFrameProps) {
               src={selectedBanner}
               width={300}
               height={200}
-              alt=''
+              alt=""
               style={{
                 objectFit: "cover",
                 width: "100%",
@@ -49,10 +59,10 @@ function BannerFrame({ navState }: BannerFrameProps) {
         ) : (
           <div className={styles.contentWrapper}>
             <Image
-              src='/assets/icons/banner.svg'
+              src="/assets/icons/banner.svg"
               width={24}
               height={24}
-              alt='banner icon'
+              alt="banner icon"
             />
             <span className={clsx(inter.className)}>Add a banner</span>
           </div>
@@ -62,7 +72,7 @@ function BannerFrame({ navState }: BannerFrameProps) {
         <>
           <SelectBanner
             handleClose={handleCloseSelectBanner}
-            handleSeletedBanner={handleSeletedBanner}
+            handleSelectedBanner={handleSelectedBanner}
           />
           <div className={clsx(styles.bannerOverlay)}></div>
         </>

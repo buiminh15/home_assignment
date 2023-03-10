@@ -1,14 +1,30 @@
 import { AccountPayload } from "@/types/AccountType";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-const BASE_URL = process.env.BASE_URL;
+// const BASE_URL = process.env.BASE_URL;
+const BASE_URL = "https://api.supermomos-dev.com/interview/social";
 
-const headers = {
+const APIGateway = axios.create({
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+const responseInterceptor = (response: AxiosResponse<any>) => {
+  return response.data;
 };
 
-const createAccount = (payload: AccountPayload) =>
-  axios.post(BASE_URL as string, payload, headers);
+APIGateway.interceptors.response.use(responseInterceptor);
+
+const createAccount = async ({
+  path,
+  payload,
+}: {
+  path: string;
+  payload: AccountPayload;
+}) => {
+  return await APIGateway.post(`${BASE_URL}${path}`, payload);
+};
+
 export { createAccount };

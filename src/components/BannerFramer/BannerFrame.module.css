@@ -1,47 +1,47 @@
 .container {
-    background: rgba(242, 242, 242, 0.1);
-    width: 100%;
-    aspect-ratio: 1.6;
+  background: rgba(242, 242, 242, 0.1);
+  width: 100%;
+  aspect-ratio: 1.6;
 
-    border: 1px dashed #F2F2F2;
-    border-radius: 0px 64px;
+  border: 1px dashed #f2f2f2;
+  border-radius: 0px 64px;
 
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .contentWrapper {
-    display: flex;
-    align-items: center;
-    gap: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
 .contentWrapper span {
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #14597A;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #14597a;
 }
 
 .bannerImage {
-    position: absolute;
-    inset: 0;
+  position: absolute;
+  inset: 0;
 }
 
 .bannerOverlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .unsetRelative {
-    position: unset;
+  position: unset;
 }
 
 @media only screen and (min-width: 1200px) {
-    .container {
-        aspect-ratio: 2;
-    }
+  .container {
+    aspect-ratio: 1.6;
+  }
 }

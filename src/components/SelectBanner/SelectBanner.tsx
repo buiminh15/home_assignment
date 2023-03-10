@@ -10,10 +10,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 type SelectBannerProps = {
   handleClose: () => void;
-  handleSeletedBanner: (banner: string) => void;
+  handleSelectedBanner: (banner: string) => void;
 };
 
-function SelectBanner({ handleClose, handleSeletedBanner }: SelectBannerProps) {
+function SelectBanner({
+  handleClose,
+  handleSelectedBanner,
+}: SelectBannerProps) {
   const [bannerUrl, setBanner] = React.useState("");
   const handleCickBanner = (banner: string) => {
     setBanner(banner);
@@ -68,7 +71,7 @@ function SelectBanner({ handleClose, handleSeletedBanner }: SelectBannerProps) {
         </button>
         <button
           onClick={() => {
-            handleSeletedBanner(bannerUrl);
+            handleSelectedBanner(bannerUrl);
             handleClose();
           }}
           className={clsx(

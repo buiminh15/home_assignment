@@ -1,4 +1,4 @@
-export type AccountPayload = {
+interface AccountPayload {
   title: string;
   startAt: string;
   venue: string;
@@ -9,4 +9,11 @@ export type AccountPayload = {
   privacy: string;
   banner: string;
   tags: string[];
-};
+}
+
+interface AccountResponse extends AccountPayload {
+  id: string;
+  questionnaire: string;
+}
+
+export type { AccountPayload, AccountResponse };
