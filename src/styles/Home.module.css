@@ -162,6 +162,10 @@
   color: #942f70;
 }
 
+.checkbox {
+  outline: 1px solid red;
+}
+
 .rowInline {
   display: inline-flex;
   align-items: center;
@@ -220,8 +224,6 @@
   position: absolute;
   width: 32%;
   z-index: 10;
-  /* background-color: #942f70; */
-  padding: 1rem 0.5rem;
 }
 
 .titleData {
@@ -229,6 +231,20 @@
   font-size: 3rem;
   line-height: 3.75rem;
   color: white;
+
+  display: inline;
+  background-color: #942f70;
+}
+
+.dateTimeText {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+.iconBig {
+  height: 1rem;
+  aspect-ratio: 1;
 }
 
 @media only screen and (min-width: 600px) {
@@ -259,17 +275,26 @@
   .sectionContainer {
     padding: 3rem 2rem;
   }
+
+  .iconBig {
+    height: 1rem;
+    aspect-ratio: 1;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
   .gridParentContainer {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 3fr 4.2fr;
     gap: 1rem;
   }
 
-  .gridContainer {
+  .gridContainerData {
     height: min-content;
+  }
+
+  .paddingIconBig {
+    padding-left: 52px;
   }
 
   .wResponsive {
@@ -278,8 +303,13 @@
 
   .sectionContainer,
   .header {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     width: 100%;
+  }
+
+  .iconBig {
+    height: 2.215rem;
+    aspect-ratio: 1;
   }
 }

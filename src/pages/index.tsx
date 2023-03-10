@@ -8,6 +8,8 @@ import Header from "@/components/Header";
 import BannerFrame from "@/components/BannerFramer/BannerFrame";
 import clsx from "clsx";
 import Datetime from "react-datetime";
+import Checkbox from "react-custom-checkbox";
+import * as Icon from "react-icons/fi";
 
 import "react-datetime/css/react-datetime.css";
 import { TAGS, URL_PATH } from "@/constants/vars";
@@ -25,7 +27,18 @@ const neue = localFont({
   src: [
     {
       path: "../../public/assets/fonts/NeueHaasDisplayBold.woff2",
-      weight: "700",
+    },
+    {
+      path: "../../public/assets/fonts/NeueHaasDisplayMediu.woff2",
+    },
+  ],
+  fallback: ["Helvetica", "ui-sans-serif"],
+});
+
+const neueMedium = localFont({
+  src: [
+    {
+      path: "../../public/assets/fonts/NeueHaasDisplayMediu.woff2",
     },
   ],
   fallback: ["Helvetica", "ui-sans-serif"],
@@ -173,12 +186,18 @@ function Home() {
             {/* date */}
             <div className={clsx(styles.mb12, styles.wFull)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
-                <Image
-                  src='/assets/icons/date.svg'
-                  width={16}
-                  height={16}
-                  alt='date icon'
-                />
+                <div className={clsx(styles.iconBig)}>
+                  <Image
+                    src='/assets/icons/date.svg'
+                    width={34}
+                    height={34}
+                    alt='date icon'
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
 
                 <Controller
                   name='date'
@@ -201,7 +220,10 @@ function Home() {
               </div>
 
               {errors.date && (
-                <p className={clsx(inter.className)} role='alert'>
+                <p
+                  className={clsx(inter.className, styles.paddingIconBig)}
+                  role='alert'
+                >
                   {errors.date?.message as unknown as string}
                 </p>
               )}
@@ -210,12 +232,18 @@ function Home() {
             {/* time */}
             <div className={clsx(styles.mb12)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
-                <Image
-                  src='/assets/icons/time.svg'
-                  width={16}
-                  height={16}
-                  alt='time icon'
-                />
+                <div className={clsx(styles.iconBig)}>
+                  <Image
+                    src='/assets/icons/time.svg'
+                    width={16}
+                    height={16}
+                    alt='time icon'
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
                 <Controller
                   name='time'
                   control={control}
@@ -236,7 +264,10 @@ function Home() {
                 />
               </div>
               {errors.time && (
-                <p className={clsx(inter.className)} role='alert'>
+                <p
+                  className={clsx(inter.className, styles.paddingIconBig)}
+                  role='alert'
+                >
                   {errors.time?.message as unknown as string}
                 </p>
               )}
@@ -390,23 +421,26 @@ function Home() {
           </h3>
 
           <div className={clsx(styles.row, styles.mb12)}>
-            <input
-              type='checkbox'
-              id='attendees'
-              className={clsx(styles.checkbox)}
-              {...register("attendees")}
+            <Controller
               name='attendees'
-            />
-            <label
-              htmlFor='attendees'
-              className={clsx(
-                inter.className,
-                styles.tagDesc,
-                styles.tagColorBlack
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  icon={<Icon.FiCheck color='#174A41' size={12} />}
+                  {...field}
+                  checked={false}
+                  borderColor='#D0D5DD'
+                  style={{ cursor: "pointer" }}
+                  labelClassName={clsx(
+                    inter.className,
+                    styles.tagDesc,
+                    styles.tagColorBlack
+                  )}
+                  labelStyle={{ marginLeft: 8, userSelect: "none" }}
+                  label='I want to approve attendees'
+                />
               )}
-            >
-              I want to approve attendees
-            </label>
+            />
           </div>
           <div>
             <p
@@ -551,7 +585,7 @@ function Home() {
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={clsx(styles.gridParentContainer)}>
-          <div className={clsx(styles.gridContainer)}>
+          <div className={clsx(styles.gridContainer, styles.gridContainerData)}>
             <div
               ref={targetRef}
               className={clsx(
@@ -561,7 +595,13 @@ function Home() {
                 styles.titleDataWrapper
               )}
             >
-              <div className={clsx(styles.inputWrapper, neue.className)}>
+              <div
+                className={clsx(
+                  styles.inputWrapper,
+                  neue.style.fontFamily,
+                  neue.className
+                )}
+              >
                 <div className={clsx(styles.input, styles.wFull)}>
                   <span className={clsx(styles.titleData)}>{data?.title}</span>
                 </div>
@@ -569,17 +609,23 @@ function Home() {
             </div>
             {/* date */}
             <div
-              className={clsx(styles.mb12, styles.wFull, inter.className)}
+              className={clsx(styles.mb12, styles.wFull, styles.rowSpan)}
               style={{ marginTop: `${dimensions.height + 10}px` }}
             >
               <div className={clsx(styles.inputWrapper, styles.row)}>
-                <Image
-                  src='/assets/icons/date.svg'
-                  width={16}
-                  height={16}
-                  alt='date icon'
-                />
-                <span>
+                <div className={clsx(styles.iconBig)}>
+                  <Image
+                    src='/assets/icons/date.svg'
+                    width={16}
+                    height={16}
+                    alt='date icon'
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
+                <span className={clsx(neue.className, styles.dateTimeText)}>
                   {dayjs(data?.startAt.split("T")[0]).format("MMMM DD, ddd")}
                 </span>
               </div>
@@ -591,13 +637,21 @@ function Home() {
               style={{ marginTop: `${dimensions.height + 10}px` }}
             >
               <div className={clsx(styles.inputWrapper, styles.row)}>
-                <Image
-                  src='/assets/icons/time.svg'
-                  width={16}
-                  height={16}
-                  alt='time icon'
-                />
-                <span>{dayjs(data?.startAt.split("T")[0]).format("h A")}</span>
+                <div className={clsx(styles.iconBig)}>
+                  <Image
+                    src='/assets/icons/time.svg'
+                    width={16}
+                    height={16}
+                    alt='time icon'
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
+                <span className={clsx(neue.className, styles.dateTimeText)}>
+                  {dayjs(data?.startAt.split("T")[0]).format("h A")}
+                </span>
               </div>
             </div>
 
@@ -605,7 +659,7 @@ function Home() {
             <div
               className={clsx(styles.row, styles.mb12, styles.gridTwoSpanCol)}
             >
-              <div className={clsx(styles.wFull, inter.className)}>
+              <div className={clsx(styles.wFull, neueMedium.className)}>
                 <div className={clsx(styles.inputWrapper)}>
                   <Image
                     src='/assets/icons/location.svg'
@@ -620,7 +674,7 @@ function Home() {
               </div>
             </div>
             {/* capacity */}
-            <div className={clsx(styles.mb32, inter.className)}>
+            <div className={clsx(styles.mb32, neueMedium.className)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
                   src='/assets/icons/capacity.svg'
@@ -643,7 +697,11 @@ function Home() {
                 alt='costs icon'
               />
               <div
-                className={clsx(styles.input, styles.wFull, inter.className)}
+                className={clsx(
+                  styles.input,
+                  styles.wFull,
+                  neueMedium.className
+                )}
               >
                 <span>{data?.price}</span>
               </div>
@@ -687,6 +745,7 @@ function Home() {
         <section className={clsx(styles.sectionContainer)}>
           {data ? renderData() : renderForm()}
         </section>
+        <button onClick={onSubmit1}>test</button>
       </main>
     </>
   );
