@@ -87,10 +87,11 @@ function Home() {
       tags,
     };
     console.log("payload:: ", payload);
-    const res = await createAccount({
+    const res = (await createAccount({
       path: URL_PATH.social,
       payload,
-    });
+    })) as unknown as AccountResponse;
+    setData(res);
   };
 
   const onSubmit1 = async () => {

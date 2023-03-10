@@ -2,7 +2,7 @@ import { AccountPayload } from "@/types/AccountType";
 import axios, { AxiosResponse } from "axios";
 
 // const BASE_URL = process.env.BASE_URL;
-const BASE_URL = "https://api.supermomos-dev.com/interview/social";
+const BASE_URL = "https://api.supermomos-dev.com/interview";
 
 const APIGateway = axios.create({
   baseURL: BASE_URL,
