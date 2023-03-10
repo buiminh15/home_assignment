@@ -28,9 +28,6 @@ const neue = localFont({
     {
       path: "../../public/assets/fonts/NeueHaasDisplayBold.woff2",
     },
-    {
-      path: "../../public/assets/fonts/NeueHaasDisplayMediu.woff2",
-    },
   ],
   fallback: ["Helvetica", "ui-sans-serif"],
 });
@@ -75,6 +72,7 @@ function Home() {
     const remainTags = tags.filter((tag) => tag !== name);
     setTags(remainTags);
     setSelectedTags([...selectedTags, name]);
+    setValue("tags", [...selectedTags, name]);
     clearErrors("tags");
   };
 
@@ -86,6 +84,7 @@ function Home() {
     const remainTags = selectedTags.filter((tag) => tag !== name);
     setTags([...tags, name]);
     setSelectedTags(remainTags);
+    setValue("tags", remainTags);
     if (!remainTags.length) {
       setError("tags", {
         message: "Tags are required",
@@ -99,6 +98,7 @@ function Home() {
 
   const handleSetBanner = (banner: string) => {
     setBanner(banner);
+    setValue("banner", banner);
     clearErrors("banner");
   };
 
@@ -125,7 +125,6 @@ function Home() {
       })) as unknown as AccountResponse;
       setData(res);
     } catch (error) {
-      console.log("📢 [index.tsx:94]", error);
       alert(JSON.stringify(error));
     }
   };
