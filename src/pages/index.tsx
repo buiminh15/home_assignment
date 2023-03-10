@@ -37,14 +37,13 @@ function Home() {
   const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
 
   React.useEffect(() => {
-    console.log("targetRef.current:: ", targetRef.current);
-    if (targetRef.current) {
+    if (data && targetRef.current) {
       setDimensions({
         width: targetRef.current.offsetWidth,
         height: targetRef.current.offsetHeight,
       });
     }
-  }, []);
+  }, [JSON.stringify(data)]);
 
   console.log("dimensions::: ", dimensions);
 
@@ -128,11 +127,11 @@ function Home() {
               className={clsx(styles.wFull, styles.mb12, styles.gridTwoSpanCol)}
             >
               <div className={clsx(styles.inputWrapper)}>
-                <AiFillBook size={16} color="#14597A" />
+                <AiFillBook size={16} color='#14597A' />
                 <div className={clsx(styles.input, styles.wFull)}>
                   <input
                     maxLength={100}
-                    type="text"
+                    type='text'
                     className={clsx(styles.wFull)}
                     {...register("title", {
                       required: "Title is required",
@@ -141,7 +140,7 @@ function Home() {
                 </div>
               </div>
               {errors.title && (
-                <p className={clsx(inter.className)} role="alert">
+                <p className={clsx(inter.className)} role='alert'>
                   {errors.title?.message as unknown as string}
                 </p>
               )}
@@ -151,14 +150,14 @@ function Home() {
             <div className={clsx(styles.mb12, styles.wFull)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
-                  src="/assets/icons/date.svg"
+                  src='/assets/icons/date.svg'
                   width={16}
                   height={16}
-                  alt="date icon"
+                  alt='date icon'
                 />
 
                 <Controller
-                  name="date"
+                  name='date'
                   control={control}
                   rules={{ required: "Date is required" }}
                   render={({ field }) => (
@@ -169,7 +168,7 @@ function Home() {
                         styles.wFull,
                         styles.unsetRelative
                       )}
-                      dateFormat="MMMM DD, ddd"
+                      dateFormat='MMMM DD, ddd'
                       timeFormat={false}
                       {...field}
                     />
@@ -178,7 +177,7 @@ function Home() {
               </div>
 
               {errors.date && (
-                <p className={clsx(inter.className)} role="alert">
+                <p className={clsx(inter.className)} role='alert'>
                   {errors.date?.message as unknown as string}
                 </p>
               )}
@@ -188,13 +187,13 @@ function Home() {
             <div className={clsx(styles.mb12)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
-                  src="/assets/icons/time.svg"
+                  src='/assets/icons/time.svg'
                   width={16}
                   height={16}
-                  alt="time icon"
+                  alt='time icon'
                 />
                 <Controller
-                  name="time"
+                  name='time'
                   control={control}
                   rules={{ required: "Time is required" }}
                   render={({ field }) => (
@@ -205,7 +204,7 @@ function Home() {
                         styles.wFull,
                         styles.unsetRelative
                       )}
-                      timeFormat="h A"
+                      timeFormat='h A'
                       dateFormat={false}
                       {...field}
                     />
@@ -213,7 +212,7 @@ function Home() {
                 />
               </div>
               {errors.time && (
-                <p className={clsx(inter.className)} role="alert">
+                <p className={clsx(inter.className)} role='alert'>
                   {errors.time?.message as unknown as string}
                 </p>
               )}
@@ -226,14 +225,14 @@ function Home() {
               <div className={clsx(styles.wFull)}>
                 <div className={clsx(styles.inputWrapper)}>
                   <Image
-                    src="/assets/icons/location.svg"
+                    src='/assets/icons/location.svg'
                     width={14}
                     height={16}
-                    alt="location icon"
+                    alt='location icon'
                   />
                   <div className={clsx(styles.input, styles.wFull)}>
                     <input
-                      type="text"
+                      type='text'
                       className={clsx(styles.wFull)}
                       {...register("venue", {
                         required: "Location is required",
@@ -242,7 +241,7 @@ function Home() {
                   </div>
                 </div>
                 {errors.venue && (
-                  <p role="alert" className={clsx(inter.className)}>
+                  <p role='alert' className={clsx(inter.className)}>
                     {errors.venue?.message as unknown as string}
                   </p>
                 )}
@@ -252,15 +251,15 @@ function Home() {
             <div className={clsx(styles.mb32)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
-                  src="/assets/icons/capacity.svg"
+                  src='/assets/icons/capacity.svg'
                   width={16}
                   height={14}
-                  alt="capacity icon"
+                  alt='capacity icon'
                 />
                 <div className={clsx(styles.input, styles.wFull)}>
                   <input
-                    placeholder="Max capacity"
-                    type="number"
+                    placeholder='Max capacity'
+                    type='number'
                     min={0}
                     className={clsx(styles.wFull)}
                     {...register("capacity", {
@@ -270,7 +269,7 @@ function Home() {
                 </div>
               </div>
               {errors.capacity && (
-                <p className={clsx(inter.className)} role="alert">
+                <p className={clsx(inter.className)} role='alert'>
                   {errors.capacity?.message as unknown as string}
                 </p>
               )}
@@ -279,15 +278,15 @@ function Home() {
             {/* cost */}
             <div className={clsx(styles.inputWrapper, styles.row, styles.mb32)}>
               <Image
-                src="/assets/icons/costs.svg"
+                src='/assets/icons/costs.svg'
                 width={16}
                 height={16}
-                alt="costs icon"
+                alt='costs icon'
               />
               <div className={clsx(styles.input, styles.wFull)}>
                 <input
-                  placeholder="Cost per person"
-                  type="number"
+                  placeholder='Cost per person'
+                  type='number'
                   min={0}
                   className={clsx(styles.wFull)}
                   {...register("cost")}
@@ -321,28 +320,28 @@ function Home() {
           )}
         >
           <label
-            htmlFor="description"
+            htmlFor='description'
             style={{ color: "#333", marginBottom: 6 }}
             className={clsx(inter.className, styles.tagDesc)}
           >
             Description
           </label>
           <textarea
-            placeholder="Description of your event..."
+            placeholder='Description of your event...'
             className={clsx(styles.textarea, inter.className, styles.tagDesc)}
-            id="description"
+            id='description'
             cols={30}
             rows={10}
             {...register("description", {
               required: "Description is required",
             })}
-            name="description"
+            name='description'
           />
           {errors.description && (
             <p
               className={clsx(inter.className)}
               style={{ paddingLeft: 0 }}
-              role="alert"
+              role='alert'
             >
               {errors.description?.message as unknown as string}
             </p>
@@ -365,14 +364,14 @@ function Home() {
 
           <div className={clsx(styles.row, styles.mb12)}>
             <input
-              type="checkbox"
-              id="attendees"
+              type='checkbox'
+              id='attendees'
               className={clsx(styles.checkbox)}
               {...register("attendees")}
-              name="attendees"
+              name='attendees'
             />
             <label
-              htmlFor="attendees"
+              htmlFor='attendees'
               className={clsx(
                 inter.className,
                 styles.tagDesc,
@@ -395,16 +394,16 @@ function Home() {
             <div className={clsx(styles.row, styles.mb12)}>
               <div className={clsx(styles.rowInline)}>
                 <input
-                  type="radio"
-                  id="public"
-                  value="Public"
+                  type='radio'
+                  id='public'
+                  value='Public'
                   {...register("privacy", {
                     required: "Privacy is required",
                   })}
-                  name="privacy"
+                  name='privacy'
                 />
                 <label
-                  htmlFor="public"
+                  htmlFor='public'
                   className={clsx(inter.className, styles.tagDesc)}
                 >
                   Public
@@ -412,16 +411,16 @@ function Home() {
               </div>
               <div className={clsx(styles.rowInline)}>
                 <input
-                  type="radio"
-                  id="audience"
-                  value="Curated Audience"
+                  type='radio'
+                  id='audience'
+                  value='Curated Audience'
                   {...register("privacy", {
                     required: "Privacy is required",
                   })}
-                  name="privacy"
+                  name='privacy'
                 />
                 <label
-                  htmlFor="audience"
+                  htmlFor='audience'
                   className={clsx(inter.className, styles.tagDesc)}
                 >
                   Curated Audience
@@ -429,16 +428,16 @@ function Home() {
               </div>
               <div className={clsx(styles.rowInline)}>
                 <input
-                  type="radio"
-                  id="community"
-                  value="Community Only"
+                  type='radio'
+                  id='community'
+                  value='Community Only'
                   {...register("privacy", {
                     required: "Privacy is required",
                   })}
-                  name="privacy"
+                  name='privacy'
                 />
                 <label
-                  htmlFor="community"
+                  htmlFor='community'
                   className={clsx(inter.className, styles.tagDesc)}
                 >
                   Community Only
@@ -447,7 +446,7 @@ function Home() {
             </div>
             {errors.privacy && (
               <p
-                role="alert"
+                role='alert'
                 className={clsx(inter.className)}
                 style={{ paddingLeft: 0, marginBottom: 2, marginTop: -8 }}
               >
@@ -495,7 +494,7 @@ function Home() {
         </div>
 
         <button
-          type="submit"
+          type='submit'
           className={clsx(
             styles.submitBtn,
             styles.mb32,
@@ -519,8 +518,8 @@ function Home() {
               className={clsx(
                 styles.wFull,
                 styles.mb12,
-                styles.gridTwoSpanCol
-                // styles.titleDataWrapper
+                styles.gridTwoSpanCol,
+                styles.titleDataWrapper
               )}
             >
               <div className={clsx(styles.inputWrapper, inter.className)}>
@@ -532,14 +531,14 @@ function Home() {
             {/* date */}
             <div
               className={clsx(styles.mb12, styles.wFull, inter.className)}
-              // style={{ marginTop: `${270 + 10}px` }}
+              style={{ marginTop: `${dimensions.height + 10}px` }}
             >
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
-                  src="/assets/icons/date.svg"
+                  src='/assets/icons/date.svg'
                   width={16}
                   height={16}
-                  alt="date icon"
+                  alt='date icon'
                 />
                 <span>
                   {dayjs(data?.startAt.split("T")[0]).format("MMMM DD, ddd")}
@@ -550,14 +549,14 @@ function Home() {
             {/* time */}
             <div
               className={clsx(styles.mb12, inter.className)}
-              // style={{ marginTop: `${270 + 10}px` }}
+              style={{ marginTop: `${dimensions.height + 10}px` }}
             >
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
-                  src="/assets/icons/time.svg"
+                  src='/assets/icons/time.svg'
                   width={16}
                   height={16}
-                  alt="time icon"
+                  alt='time icon'
                 />
                 <span>{dayjs(data?.startAt.split("T")[0]).format("h A")}</span>
               </div>
@@ -570,10 +569,10 @@ function Home() {
               <div className={clsx(styles.wFull, inter.className)}>
                 <div className={clsx(styles.inputWrapper)}>
                   <Image
-                    src="/assets/icons/location.svg"
+                    src='/assets/icons/location.svg'
                     width={14}
                     height={16}
-                    alt="location icon"
+                    alt='location icon'
                   />
                   <div className={clsx(styles.input, styles.wFull)}>
                     <span>{data?.venue}</span>
@@ -585,10 +584,10 @@ function Home() {
             <div className={clsx(styles.mb32, inter.className)}>
               <div className={clsx(styles.inputWrapper, styles.row)}>
                 <Image
-                  src="/assets/icons/capacity.svg"
+                  src='/assets/icons/capacity.svg'
                   width={16}
                   height={14}
-                  alt="capacity icon"
+                  alt='capacity icon'
                 />
                 <div className={clsx(styles.input, styles.wFull)}>
                   <span>{data?.capacity}</span>
@@ -599,10 +598,10 @@ function Home() {
             {/* cost */}
             <div className={clsx(styles.inputWrapper, styles.row, styles.mb32)}>
               <Image
-                src="/assets/icons/costs.svg"
+                src='/assets/icons/costs.svg'
                 width={16}
                 height={16}
-                alt="costs icon"
+                alt='costs icon'
               />
               <div
                 className={clsx(styles.input, styles.wFull, inter.className)}
@@ -639,9 +638,9 @@ function Home() {
     <>
       <Head>
         <title>Supermomos</title>
-        <meta name="description" content="Generated by create next app" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='Generated by create next app' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
         <Header handleSideNav={handleNavMenu} />
@@ -649,13 +648,12 @@ function Home() {
         <section className={clsx(styles.sectionContainer)}>
           {data ? renderData() : renderForm()}
 
-          {/* <button
+          <button
             style={{ padding: 10, backgroundColor: "green" }}
             onClick={onSubmit1}
           >
             TEST 1
-          </button> */}
-          {/* <div>{JSON.stringify(data)}</div> */}
+          </button>
         </section>
       </main>
     </>
