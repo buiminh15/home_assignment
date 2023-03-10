@@ -683,6 +683,7 @@ function Home() {
           </div>
           <div className={clsx(styles.bannerFramer, styles.mb32)}>
             <BannerFrame
+              disabled={!!data}
               navState={isOpeNav}
               handleSetBanner={handleSetBanner}
               banner={data?.banner.replace("resourcesus", "resources-us")}

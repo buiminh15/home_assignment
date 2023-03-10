@@ -25,7 +25,7 @@ function SelectBanner({
   return (
     <div className={styles.container}>
       <div className={styles.headerSelectBanner}>
-        <span>Choose a banner</span>
+        <span className={clsx(inter.className)}>Choose a banner</span>
         <div onClick={handleClose} className={clsx(styles.cursorPointer)}>
           <AiOutlineClose size={24} color={"#3f3f3f"} />
         </div>

@@ -11,9 +11,15 @@ type BannerFrameProps = {
   navState: boolean;
   handleSetBanner: (banner: string) => void;
   banner?: string;
+  disabled?: boolean;
 };
 
-function BannerFrame({ navState, banner, handleSetBanner }: BannerFrameProps) {
+function BannerFrame({
+  navState,
+  banner,
+  disabled,
+  handleSetBanner,
+}: BannerFrameProps) {
   const [showSelectBanner, setShowBanner] = React.useState(false);
   const [selectedBanner, setSelectedBanner] = React.useState("");
 
@@ -24,6 +30,9 @@ function BannerFrame({ navState, banner, handleSetBanner }: BannerFrameProps) {
   }, [banner]);
 
   const handleOpenSelectBanner = () => {
+    if (disabled) {
+      return;
+    }
     setShowBanner(true);
   };
 
@@ -48,7 +57,7 @@ function BannerFrame({ navState, banner, handleSetBanner }: BannerFrameProps) {
               src={selectedBanner}
               width={300}
               height={200}
-              alt=""
+              alt=''
               style={{
                 objectFit: "cover",
                 width: "100%",
@@ -59,10 +68,10 @@ function BannerFrame({ navState, banner, handleSetBanner }: BannerFrameProps) {
         ) : (
           <div className={styles.contentWrapper}>
             <Image
-              src="/assets/icons/banner.svg"
+              src='/assets/icons/banner.svg'
               width={24}
               height={24}
-              alt="banner icon"
+              alt='banner icon'
             />
             <span className={clsx(inter.className)}>Add a banner</span>
           </div>
