@@ -1,11 +1,7 @@
 import { AccountPayload } from "@/types/AccountType";
 import axios, { AxiosResponse } from "axios";
 
-// const BASE_URL = process.env.BASE_URL;
-const BASE_URL = "https://api.supermomos-dev.com/interview";
-
 const APIGateway = axios.create({
-  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -24,7 +20,7 @@ const createAccount = async ({
   path: string;
   payload: AccountPayload;
 }) => {
-  return await APIGateway.post(`${BASE_URL}${path}`, payload);
+  return await APIGateway.post(`${path}`, payload);
 };
 
 export { createAccount };

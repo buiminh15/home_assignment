@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/social",
-        destination: "https://api.supermomos-dev.com/interview/social",
+        destination: process.env.BASE_URL,
       },
     ];
   },
@@ -14,10 +14,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "supermomos-app-resources-us.s3.amazonaws.com",
-      },
-      {
-        protocol: "https",
-        hostname: "supermomos-app-resourcesus.s3.amazonaws.com",
       },
     ],
   },
