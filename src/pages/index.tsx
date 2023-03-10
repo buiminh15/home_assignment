@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 import Header from "@/components/Header";
 import BannerFrame from "@/components/BannerFramer/BannerFrame";
@@ -20,11 +21,23 @@ import dayjs from "dayjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const neue = localFont({
+  src: [
+    {
+      path: "../../public/assets/fonts/NeueHaasDisplayBold.woff2",
+      weight: "700",
+    },
+  ],
+  fallback: ["Helvetica", "ui-sans-serif"],
+});
+
 function Home() {
   const {
     register,
     handleSubmit,
+    setValue,
     setError,
+    clearErrors,
     control,
     formState: { errors },
   } = useForm<any>();
@@ -49,6 +62,7 @@ function Home() {
     const remainTags = tags.filter((tag) => tag !== name);
     setTags(remainTags);
     setSelectedTags([...selectedTags, name]);
+    clearErrors("tags");
   };
 
   const handleUnSelectedTags = (
@@ -59,6 +73,11 @@ function Home() {
     const remainTags = selectedTags.filter((tag) => tag !== name);
     setTags([...tags, name]);
     setSelectedTags(remainTags);
+    if (!remainTags.length) {
+      setError("tags", {
+        message: "Tags are required",
+      });
+    }
   };
 
   const handleNavMenu = (state: boolean) => {
@@ -67,24 +86,26 @@ function Home() {
 
   const handleSetBanner = (banner: string) => {
     setBanner(banner);
+    clearErrors("banner");
   };
 
   const onSubmit = async (data: any) => {
-    const convertedDate = dayjs(data.date).format("YYYY-MM-DD");
-    const convertedTime = dayjs(data.time).format("hh:mm:ss");
-    const payload: AccountPayload = {
-      title: data.title,
-      startAt: `${convertedDate}T${convertedTime}+00:00`,
-      venue: data.venue,
-      capacity: data.capacity,
-      price: data.cost,
-      description: data.description,
-      isManualApprove: data.attendees,
-      privacy: data.privacy,
-      banner: hasBanner,
-      tags: selectedTags,
-    };
     try {
+      const convertedDate = dayjs(data.date).format("YYYY-MM-DD");
+      const convertedTime = dayjs(data.time).format("hh:mm:ss");
+      const payload: AccountPayload = {
+        title: data.title,
+        startAt: `${convertedDate}T${convertedTime}+00:00`,
+        venue: data.venue,
+        capacity: data.capacity,
+        price: data.cost,
+        description: data.description,
+        isManualApprove: data.attendees,
+        privacy: data.privacy,
+        banner: hasBanner,
+        tags: selectedTags,
+      };
+
       const res = (await createAccount({
         path: URL_PATH.social,
         payload,
@@ -94,6 +115,31 @@ function Home() {
       console.log("📢 [index.tsx:94]", error);
       alert(JSON.stringify(error));
     }
+  };
+
+  const onSubmit1 = async () => {
+    const payload: AccountPayload = {
+      title:
+        "Web3 Founders & Designers Mixer + fireside chat with Coinbase Senior Designer & Airfoil founder",
+      startAt: "2022-10-11T19:00:00+00:00",
+      venue: "Chelsea Market (163 W 20nd Street). Manhattan, NYC",
+      capacity: 50,
+      price: 30,
+      description:
+        "Calling all web3 founders and designers for an exciting night of exchanging ideas and making new friends! Make friends with fellow designers and founders in web3. There will also be lots of insights to be gained through an intimate chat\n+Q&A with two giants in the industry: \n\nPhil Hedayatnia, Founder & CEO of Airfoil, a\ngrowth design studio that has designed and built products in web3, the creator economy,\nthe future of work, and much more for 80+ startups since 2018 \n\nJihoon Suh, Senior\nProduct Designer at Coinbase, who was previously Senior Product Designer for Messenger\nfor Meta. \n\nThis will be a curated group with limited spots, so do sign up early!\n\nAbout\nAirfoil: \n\nAirfoil Studio is the design, branding, and engineering team helping web3 take flight. As one of crypto's first large-scale design firms, we aim to design a friendlier\nfinancial layer for the internet. We're a team of 85+ creatives, working from Airfoil's hubs in\nToronto, Singapore, and Seoul, who've worked on 100+ projects since 2018, including\nSolana Pay, Drift Protocol, Bonfida Solana Name Service, Utopia Labs, Planetarium,\nLayer3.xyz, MarginFi, Hyperspace, VBA Game, and more.\n\nLearn more about Airfoil and\nour work at airfoil.studio.",
+      isManualApprove: true,
+      privacy: "Public",
+      banner:
+        "https://supermomos-app-resourcesus.s3.amazonaws.com/Images/SocialBanner/banner_1.jpg",
+      tags: ["Product", "Design"],
+    };
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post("/social", payload, headers);
+    setData(res.data as AccountResponse);
   };
 
   const renderForm = () => {
@@ -276,16 +322,19 @@ function Home() {
             <BannerFrame
               navState={isOpeNav}
               handleSetBanner={handleSetBanner}
+              {...register("banner", {
+                required: "Banner is required",
+              })}
             />
-            {/* {errors.banner && (
-            <p
-              className={clsx(inter.className)}
-              style={{ paddingLeft: 0 }}
-              role="alert"
-            >
-              {errors.banner?.message as unknown as string}
-            </p>
-          )} */}
+            {errors.banner && (
+              <p
+                className={clsx(inter.className)}
+                style={{ paddingLeft: 0 }}
+                role='alert'
+              >
+                {errors.banner?.message as unknown as string}
+              </p>
+            )}
           </div>
         </div>
         {/* description */}
@@ -461,6 +510,9 @@ function Home() {
             <div className={clsx(styles.row)}>
               {tags.map((tag) => (
                 <Tag
+                  {...register("tags", {
+                    required: "Tags are required",
+                  })}
                   key={tag}
                   name={tag}
                   textStyle={inter.className}
@@ -468,6 +520,15 @@ function Home() {
                 />
               ))}
             </div>
+            {errors.tags && (
+              <p
+                role='alert'
+                className={clsx(inter.className)}
+                style={{ paddingLeft: 0, marginBottom: 2, marginTop: 8 }}
+              >
+                {errors.tags?.message as unknown as string}
+              </p>
+            )}
           </div>
         </div>
 
@@ -500,7 +561,7 @@ function Home() {
                 styles.titleDataWrapper
               )}
             >
-              <div className={clsx(styles.inputWrapper, inter.className)}>
+              <div className={clsx(styles.inputWrapper, neue.className)}>
                 <div className={clsx(styles.input, styles.wFull)}>
                   <span className={clsx(styles.titleData)}>{data?.title}</span>
                 </div>
@@ -626,6 +687,12 @@ function Home() {
         <section className={clsx(styles.sectionContainer)}>
           {data ? renderData() : renderForm()}
         </section>
+        <button
+          style={{ padding: 10, backgroundColor: "green" }}
+          onClick={onSubmit1}
+        >
+          TEST 1
+        </button>
       </main>
     </>
   );
