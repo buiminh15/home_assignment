@@ -85,12 +85,19 @@ function Home() {
       banner: hasBanner,
       tags,
     };
-    console.log("payload:: ", payload);
-    const res = (await createAccount({
-      path: URL_PATH.social,
-      payload,
-    })) as unknown as AccountResponse;
-    setData(res);
+    // const res = (await createAccount({
+    //   path: URL_PATH.social,
+    //   payload,
+    // })) as unknown as AccountResponse;
+    // setData(res);
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post("/social", payload, headers);
+    setData(res.data as AccountResponse);
   };
 
   const onSubmit1 = async () => {
